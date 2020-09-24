@@ -69,7 +69,7 @@
 (setq company-show-numbers t)
 (after! ess-r-mode
   (set-company-backend! 'ess-r-mode
-    (:separate company-R-library company-R-args company-R-objects company-dabbrev-code)))
+    '(:separate company-R-library company-R-args company-R-objects company-dabbrev-code)))
 (after! ess-r-mode
   (progn
     (setq-default ess-style 'Rstudio-)
@@ -86,3 +86,28 @@
 (map! :leader
       :desc "ess-r-tinytest"
       "m p t" #'ess-r-tinytest)
+
+
+(defun prep-drake-run ()
+  "prep drake run"
+  (interactive)
+  (projectile-save-project-buffers)
+  (ess-eval-linewise
+   "source('prep_drake_run.R')"
+   "Prepare next drake run"
+   ))
+(map! :leader
+      :desc "prep-drake-run"
+      "d p" #'prep-drake-run)
+
+(defun exec-drake-run ()
+  "execute drake run"
+  (interactive)
+  (projectile-save-project-buffers)
+  (ess-eval-linewise
+   "execute_plans(confirm = FALSE)"
+   "Execute drake run"
+   ))
+(map! :leader
+      :desc "exec-drake-run"
+      "d e" #'exec-drake-run)
