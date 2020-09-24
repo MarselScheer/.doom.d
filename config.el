@@ -74,3 +74,15 @@
   (progn
     (setq-default ess-style 'Rstudio-)
     (setq ess-eval-visibly 't)))
+
+(defun ess-r-tinytest ()
+  "Interface to tinytest"
+  (interactive)
+  (projectile-save-project-buffers)
+  (ess-r-package-eval-linewise
+   "pkgload::load_all(); tinytest::test_all()"
+   "Load package. Test with tinytest"
+   ))
+(map! :leader
+      :desc "ess-r-tinytest"
+      "m p t" #'ess-r-tinytest)
