@@ -60,3 +60,17 @@
 (setq x-select-enable-primary t)
 (setq x-select-enable-clipboard nil)
  
+;; have no idea why this is the only way
+;; to add company-dabbrev-code to the
+;; backend. Just follow https://github.com/emacs-ess/ESS/issues/955
+(require 'company-dabbrev-code)
+(add-to-list 'company-backends #'company-dabbrev-code)
+(setq company-idle-delay 0)
+(setq company-show-numbers t)
+(after! ess-r-mode
+  (set-company-backend! 'ess-r-mode
+    (:separate company-R-library company-R-args company-R-objects company-dabbrev-code)))
+(after! ess-r-mode
+  (progn
+    (setq-default ess-style 'Rstudio-)
+    (setq ess-eval-visibly 't)))
