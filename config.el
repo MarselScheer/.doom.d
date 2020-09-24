@@ -33,7 +33,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -52,3 +52,11 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(setq-default evil-escape-key-sequence "kj")
+(setq-default confirm-kill-emacs nil)
+(map! :i "C-x C-s" #'save-buffer)
+(setq mouse-yank-at-point t)
+(setq x-select-enable-primary t)
+(setq x-select-enable-clipboard nil)
+ 
