@@ -49,7 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-'(package! poly-R
+(package! poly-R
    :recipe (:host github :repo "polymode/poly-R"))
-
           
