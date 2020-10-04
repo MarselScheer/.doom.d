@@ -72,7 +72,7 @@
     '(:separate company-R-library company-R-args company-R-objects company-dabbrev-code)))
 (after! ess-r-mode
   (progn
-    (setq-default ess-style 'Rstudio-)
+    (setq-default ess-style 'RStudio-)
     (setq ess-eval-visibly 't)))
 
 (defun ess-r-tinytest ()
