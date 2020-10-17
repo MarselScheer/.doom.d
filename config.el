@@ -88,7 +88,56 @@
       "m p t" #'ess-r-tinytest)
 
 
-(defun prep-drake-run ()
+(defun ess-head-at-point ()
+  "prints head of whats at point"
+  (interactive)
+  (let ((target (thing-at-point 'symbol)))
+    (ess-eval-linewise
+     (format "head(%s)" target)
+     (format "Head of instance: %s" target)
+     ))
+  )
+(map! :leader
+      :desc "ess-head-at-point"
+      "m i h" #'ess-head-at-point)
+
+(defun ess-tail-at-point ()
+  "prints tail of whats at point"
+  (interactive)
+  (let ((target (thing-at-point 'symbol)))
+    (ess-eval-linewise
+     (format "tail(%s)" target)
+     (format "Tail of instance: %s" target)
+     ))
+  )
+(map! :leader
+      :desc "ess-tail-at-point"
+      "m i t" #'ess-tail-at-point)
+
+(defun drake-load-at-point ()
+  "load drake-target at point"
+  (interactive)
+  (let ((target (thing-at-point 'symbol)))
+    (ess-eval-linewise
+     (format "drake::loadd(%s)" target)
+     (format "Load target: %s" target)
+     ))
+  )
+(map! :leader
+      :desc "drake-load-at-point"
+      "d l" #'drake-load-at-point)
+
+(defun drake-load-at-point-and-head ()
+  "load drake-target at point and print head"
+  (interactive)
+  (drake-load-at-point)
+  (ess-head-at-point)
+  )
+(map! :leader
+      :desc "drake-load-at-point-and-head"
+      "d i" #'drake-load-at-point-and-head)
+
+(defun drake-prep-run ()
   "prep drake run"
   (interactive)
   (projectile-save-project-buffers)
@@ -97,10 +146,10 @@
    "Prepare next drake run"
    ))
 (map! :leader
-      :desc "prep-drake-run"
-      "d p" #'prep-drake-run)
+      :desc "drake-prep-run"
+      "d p" #'drake-prep-run)
 
-(defun exec-drake-run ()
+(defun drake-exec-run ()
   "execute drake run"
   (interactive)
   (projectile-save-project-buffers)
@@ -109,5 +158,5 @@
    "Execute drake run"
    ))
 (map! :leader
-      :desc "exec-drake-run"
-      "d e" #'exec-drake-run)
+      :desc "drake-exec-run"
+      "d e" #'drake-exec-run)
