@@ -88,6 +88,19 @@
       "m p t" #'ess-r-tinytest)
 
 
+(defun ess-print-at-point ()
+  "print of whats at point"
+  (interactive)
+  (let ((target (thing-at-point 'symbol)))
+    (ess-eval-linewise
+     (format "%s" target)
+     (format "Print instance: %s" target)
+     ))
+  )
+(map! :leader
+      :desc "ess-print-at-point"
+      "m i p" #'ess-print-at-point)
+
 (defun ess-head-at-point ()
   "prints head of whats at point"
   (interactive)
@@ -126,6 +139,16 @@
 (map! :leader
       :desc "drake-load-at-point"
       "d l" #'drake-load-at-point)
+
+(defun drake-load-at-point-and-print ()
+  "load drake-target at point and print"
+  (interactive)
+  (drake-load-at-point)
+  (ess-print-at-point)
+  )
+(map! :leader
+      :desc "drake-load-at-point-and-print"
+      "d i p" #'drake-load-at-point-and-print)
 
 (defun drake-load-at-point-and-head ()
   "load drake-target at point and print head"
